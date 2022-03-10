@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
   before_action :set_device, only: [:show, :edit, :update, :destroy]
 
-  def show   
+  def show          
   end
 
   def new
@@ -18,14 +18,14 @@ class AdminController < ApplicationController
     redirect_to admin_index_path
     if @device.save
       flash[:notice] = "Console was created successfully"
-      redirect_to @device
+      redirect_to admin_index_path
     else
       render 'new'
     end
   end
 
   def edit
-    @device = Device.find(params[:id])
+    @device = Device.find(params[:id])  
   end
   
   def update
