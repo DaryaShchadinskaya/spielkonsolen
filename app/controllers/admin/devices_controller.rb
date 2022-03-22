@@ -1,5 +1,5 @@
 class Admin::DevicesController < Admin::BaseController
-  before_action :set_device, only: [:show, :edit, :update, :destroy]
+  before_action :set_device, only: [:show, :edit, :update, :destroy, :purge_image]
 
   def show          
   end
@@ -9,20 +9,26 @@ class Admin::DevicesController < Admin::BaseController
   end
 
   def index
-    @device = Device.all
+    @device = Device.paginate(page: params[:page], per_page: 10)
   end    
 
   def create
     @device = Device.new(device_params)  
     if @device.valid?
+      @device.save
       flash[:success] = "Console was created successfully"
-      redirect_to admin_devices_path(@device)
+      redirect_to admin_devices_path
     else
-      flash[:errors] = @device.errors.full_messages
+      flash[:error] = @device.errors
       redirect_to new_admin_device_path(@device)
     end
   end
 
+  def purge_image
+    @device = Device.find(params[:id])
+    @device.image.purge
+    redirect_back fallback_location: admin_devices_path, notice: "Success"
+  end
 
   def edit
     @device = Device.find(params[:id])  
@@ -40,7 +46,13 @@ class Admin::DevicesController < Admin::BaseController
   def destroy
     @device = Device.find(params[:id])
     @device.destroy
-    redirect_to admin_devices_path
+    redirect_to admin_device_path(@device)
+  end
+
+  def delete_image_attachment
+    @image = ActiveStorage::Attachment.find(params[:id])
+    @image.purge_later
+    redirect_back(fallback_location: admin_devices_path)
   end
 
   private

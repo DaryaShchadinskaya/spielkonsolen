@@ -1,32 +1,9 @@
-@import 'bootstrap/dist/css/bootstrap';
-
 .navbar {
   background-color: black !important;
 }
 
 .nav-link {
   color: white !important;
-}
-
-#logo {
-  float: left;
-  font-size: 1.7em;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  font-weight: bold;
-}
-
-#home-container {
-  margin-top: 25px;
-}
-
-.jumbotron {
-  background-image: asset-url('jumbo-copy.jpg');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 425px;
 }
 
 html,
@@ -50,9 +27,9 @@ body {
   padding: 0.3em;
   cursor: default; }
   .flickr_pagination a, .flickr_pagination span, .flickr_pagination em {
-    padding: 0.2em 0.5em;
+    padding: 0.2em 0.5em; 
     border-radius: 5px;
-   }
+  }
   .flickr_pagination .disabled {
     color: #aaaaaa; }
   .flickr_pagination .current {

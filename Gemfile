@@ -20,10 +20,9 @@ gem 'jquery-rails'
 # gem "kredis"
 # gem "bcrypt", "~> 3.1.7"
 
+gem 'will_paginate', '~> 3.3'
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
-
 gem 'bootsnap', '>= 1.4.4', require: false
-
 gem 'pry'
 
 # gem "image_processing", "~> 1.2"

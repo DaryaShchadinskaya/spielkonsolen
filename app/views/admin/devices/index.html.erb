@@ -1,9 +1,11 @@
 <h1 class="text-center mt-4">[ADMIN] Listing all consoles</h1>
 
 <div class="flickr_pagination">
-  <%# <%= will_paginate @devices, :container => false %>
+  <%= will_paginate @device, :container => false %>
 </div>
+
 <%= render 'console' %>
+
 <div class="flickr_pagination mb-4">
-  <%# <%= will_paginate @devices, :container => false %>
+  <%= will_paginate @device, :container => false %>
 </div>
