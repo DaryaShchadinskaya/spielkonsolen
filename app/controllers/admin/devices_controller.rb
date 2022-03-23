@@ -1,6 +1,7 @@
 class Admin::DevicesController < Admin::BaseController
   before_action :set_device, only: [:show, :edit, :update, :destroy, :purge_image]
 
+
   def show          
   end
 
@@ -20,8 +21,21 @@ class Admin::DevicesController < Admin::BaseController
       redirect_to admin_devices_path
     else
       flash[:error] = @device.errors
-      redirect_to new_admin_device_path(@device)
+      render 'edit'
     end
+  end
+
+  def update
+    if @device.update(device_params)
+      flash[:notice] = "Console was updated successfully."
+      redirect_to admin_device_url(@device)
+    else
+      render 'edit'
+    end
+  end
+
+  def edit
+    @device = Device.find(params[:id])  
   end
 
   def purge_image
@@ -30,19 +44,7 @@ class Admin::DevicesController < Admin::BaseController
     redirect_back fallback_location: admin_devices_path, notice: "Success"
   end
 
-  def edit
-    @device = Device.find(params[:id])  
-  end
   
-  def update
-    if @device.update(device_params)
-      flash[:notice] = "Console was updated successfully."
-      redirect_to admin_devices_path
-    else
-      render 'edit'
-    end
-  end
-
   def destroy
     @device = Device.find(params[:id])
     @device.destroy
@@ -62,7 +64,7 @@ class Admin::DevicesController < Admin::BaseController
   end
 
   def device_params
-    params.require(:device).permit(:name, :complectation, :description, :price, :image)
+    params.require(:device).permit(:name, :equipment, :description, :price, :image)
   end
 
   def image

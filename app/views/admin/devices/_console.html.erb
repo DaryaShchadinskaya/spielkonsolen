@@ -7,21 +7,24 @@
           <div class="card-body">
             <h5 class="card-title"><%= link_to device.name, admin_device_url(device), class: "text-success" %></h5>
               <div class="form-group row">
-              <%= image_tag device.image, width: "500px" if device.image.attached? %>         
+
+               <div class="field">
+                <% if device.image.attached? %>
+                <%= image_tag (device.image), style: "width: 500px" %>  
+                <% else %>
+                <%= image_tag("/default_image.jpg") %>
+                <% end %>       
               </div>       
+
             <p class="card-text"><%= truncate(device.description, length: 500) %></p>
                 <ul class="list-group list-group-flush">
-                <li class="list-group-item">Complectation: <%= truncate(device.complectation, length: 500) %></li>
+                <li class="list-group-item">Equipment: <%= truncate(device.equipment, length: 500) %></li>
                 <li class="list-group-item">Price for 1 day: <%= device.price %> $</li>
                
                 <%= link_to 'View details', admin_device_url(device), class: "btn btn-outline-success" %>
                 <%= link_to 'Edit', edit_admin_device_path(device), class: "btn btn-outline-info" %>
                 <%= link_to 'Delete', admin_device_path(device), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %> 
     
-          <div class="card-footer text-muted">
-            <small>Created <%= time_ago_in_words(device.created_at) %> ago, 
-            edited <%= time_ago_in_words(device.updated_at) %> ago</small>
-          </div>
          </div>
         </div>
       </div>

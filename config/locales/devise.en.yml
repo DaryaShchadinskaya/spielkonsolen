@@ -63,3 +63,11 @@ en:
       not_saved:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
+  activerecord:
+    errors:
+      models:
+        device:
+          attributes:
+            image:
+              max_size_error: "file size is too big. Max allowed size is 10 Mb"
+              content_type: "format is not allowed. Allowed formats are jpg, jpeg, png"

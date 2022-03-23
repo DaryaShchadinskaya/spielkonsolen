@@ -9,11 +9,15 @@
       <div class="card text-center shadow mb-5 bg-white rounded">
         <div class="card-header font-italic">
         </div>
-        <div class="card-body">
-         <%= image_tag @device.image, width: "500px" if @device.image.attached? %>   
-          <div class="card-text text-center"><%= simple_format(@device.description) %></div>
-          <div class="card-text text-center"><%= simple_format(@device.complectation) %></div>
-          <div class="card-text text-center"><%= @device.price %></div>
+        <div class="card-body">     
+                <% if @device.image.attached? %>
+                <%= image_tag (@device.image), style: "width: 500px" %>  
+                <% else %>
+                <%= image_tag("/default_image.jpg") %>
+                <% end %>   
+                <div class="card-text text-center"><b><h4>Description: </h4></b><%= @device.description %></div>
+                <div class="card-text text-center"><b><h4>Equipment: </h4></b><%= @device.equipment %></div>
+                <div class="card-text text-center"><b><h4>Price for 1 day: </h4></b><%= @device.price %> $</div>
 
           <%= link_to "Edit", edit_admin_device_path(@device), class: "btn btn-outline-info" %>
           <%= link_to "Delete", admin_device_path(@device), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
