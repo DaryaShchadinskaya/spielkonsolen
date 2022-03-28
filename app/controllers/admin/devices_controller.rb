@@ -1,6 +1,6 @@
 class Admin::DevicesController < Admin::BaseController
   before_action :set_device, only: [:show, :edit, :update, :destroy, :purge_image]
-
+  before_action :set_search
 
   def show          
   end
@@ -11,7 +11,9 @@ class Admin::DevicesController < Admin::BaseController
 
   def index
     @device = Device.paginate(page: params[:page], per_page: 10)
-  end    
+    @q = Device.ransack(params[:q])
+    @device = @q.result.order(id: :desc).page(params[:page])
+  end
 
   def create
     @device = Device.new(device_params)  

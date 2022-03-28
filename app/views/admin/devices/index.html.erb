@@ -4,6 +4,16 @@
   <%= will_paginate @device, :container => false %>
 </div>
 
+<% if (@devices) %>
+  <% if @devices.empty? %>
+    No devices found!
+  <% else %>
+    <% @devices.each do |device| %>  
+    <p><%= link_to device.name, admin_device_url(device), class: "text-success" %></p>
+    <% end %>
+  <% end %>
+<% end %>
+
 <%= render 'console' %>
 
 <div class="flickr_pagination mb-4">

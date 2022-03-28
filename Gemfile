@@ -16,6 +16,7 @@ gem "webpacker"
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'sassc-rails', '>= 2.1.0'
 gem 'jquery-rails'
+gem 'ransack'
 
 # gem "kredis"
 # gem "bcrypt", "~> 3.1.7"
