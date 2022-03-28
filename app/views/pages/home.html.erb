@@ -1,0 +1,14 @@
+<h1 class="text-center mt-4">This is the homepage with devices for users</h1>
+
+
+<% if (@devices) %>
+  <% if @devices.empty? %>
+    No devices found!
+  <% else %>
+    <% @devices.each do |device| %>  
+    <p><%= link_to device.name, admin_device_url(device), class: "text-success" %></p>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= render 'admin/devices/console' %>

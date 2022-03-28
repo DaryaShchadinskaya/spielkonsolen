@@ -73,3 +73,5 @@ class Admin::DevicesController < Admin::BaseController
     ActiveStorage::Attached::One.new('image', Device.find(id), dependent: :purge_later)
   end
 end
+
+

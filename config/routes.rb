@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
-  root 'admin/devices#index'
   
+  root 'pages#home'
+
 end
