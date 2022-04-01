@@ -1,6 +1,5 @@
 class Admin::DevicesController < Admin::BaseController
   before_action :set_device, only: [:show, :edit, :update, :destroy, :purge_image]
-  before_action :set_search
 
   def show          
   end
@@ -11,9 +10,20 @@ class Admin::DevicesController < Admin::BaseController
 
   def index
     @device = Device.paginate(page: params[:page], per_page: 10)
-    @q = Device.ransack(params[:q])
-    @device = @q.result.order(id: :desc).page(params[:page])
+    if params[:search]
+      @devices = Device.search(params[:search]).order("created_at DESC")
+    else
+      @devices = Device.all.order('created_at DESC')
+    end
   end
+
+  def update_status
+    @device = Device.find(params[:id])
+    params[:status].present? && Device::STATUSES.include?(params[:status].to_sym)
+    @device.update(status: params[:status])
+    redirect_to @device, notice: "Status changed to #{@device.status}"
+  end
+
 
   def create
     @device = Device.new(device_params)  

@@ -1,21 +1,41 @@
 <h1 class="text-center mt-4">[ADMIN] Listing all consoles</h1>
-
-<div class="flickr_pagination">
-  <%= will_paginate @device, :container => false %>
-</div>
-
 <% if (@devices) %>
-  <% if @devices.empty? %>
-    No devices found!
+  <% if (@devices.empty?) %> 
+   <h5 class="text-center">No devices found</h5>
   <% else %>
-    <% @devices.each do |device| %>  
-    <p><%= link_to device.name, admin_device_url(device), class: "text-success" %></p>
+<div class="text-center flickr_pagination">
+  <%= will_paginate @device, :container => false %>
+  </div>
+   <% @devices.each do |device| %>  
+    <div class="container">
+     <div class="row justify-content-md-center">
+      <div class="col-8 mt-4">
+        <div class="card text-center shadow mb-5 bg-white rounded">
+          <div class="card-header font-italic">          
+          <div class="card-body">
+          <li class="card-title"><strong>Status: </strong><%= device.status %></li>
+            <h5 class="card-title"><%= link_to device.name, admin_device_url(device), class: "text-success" %></h5>
+              <div class="form-group row">
+               <div class="field">
+                <% if device.image.attached? %>
+                <%= image_tag (device.image), style: "width: 500px" %>  
+                <% else %>
+                <%= image_tag("default_image.jpg", :size => "360x280", :crop => :fill) %>
+                <% end %>       
+              </div>   
+                <p class="card-text"><strong>Description: </strong><%= truncate(device.description, length: 500) %></p>
+                <ul class="list-group list-group-flush">
+                <li class="card-title"><strong>Equipment: </strong><%= truncate(device.equipment, length: 500) %></li>
+                <li class="card-title"><strong>Price for 1 day: </strong><%= device.price %> $</li>
+               
+                <%= link_to 'View details', admin_device_url(device), class: "btn btn-outline-success" %>                
+                <%= link_to 'Edit', edit_admin_device_path(device), class: "btn btn-outline-info" %>
+                <%= link_to 'Delete', admin_device_path(device), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %> 
+           </div>
+          </div>
+        </div>
+       </div>
+      </div>
     <% end %>
   <% end %>
 <% end %>
-
-<%= render 'console' %>
-
-<div class="flickr_pagination mb-4">
-  <%= will_paginate @device, :container => false %>
-</div>

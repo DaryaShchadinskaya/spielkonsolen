@@ -1,7 +1,23 @@
 class UsersController < ApplicationController
 
-    def index    
-      @device = Device.paginate(page: params[:page], per_page: 10)
+
+  def new
+    @user = User.new
+  end
+
+   def create
+    @user = User.new(user_params)
+    if @user.save
+      flash[:notice] = "Welcome to the Spielkonsolen, you have successfully signed up"
+      redirect_to devices_path
+    else
+      render 'new'
     end
-  
-  end 
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:username, :email, :password)
+  end
+end

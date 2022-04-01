@@ -12,14 +12,12 @@
                 <% if device.image.attached? %>
                 <%= image_tag (device.image), style: "width: 500px" %>  
                 <% else %>
-                <%= image_tag("/default_image.jpg") %>
+                <%= image_tag("default_image.jpg", :size => "360x280", :crop => :fill) %>
                 <% end %>       
-              </div>       
-
-            <p class="card-text"><%= truncate(device.description, length: 500) %></p>
-                <ul class="list-group list-group-flush">
-                <li class="list-group-item">Equipment: <%= truncate(device.equipment, length: 500) %></li>
-                <li class="list-group-item">Price for 1 day: <%= device.price %> $</li>
+              </div>  
+                <p class="card-text"><%= truncate(device.description, length: 500) %></p>
+                <li class="card-title">Equipment: <%= truncate(device.equipment, length: 500) %></li>
+                <li class="card-title">Price for 1 day: <%= device.price %> $</li>
                
                 <%= link_to 'View details', admin_device_url(device), class: "btn btn-outline-success" %>
                 <%# <% if current_user.admin? %> 

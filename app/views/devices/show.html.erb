@@ -1,13 +1,6 @@
+<h1 class="text-center mt-4">[USER] Showing device details</h1>
 
-<h1 class="text-center mt-4">Showing device details</h1>
-
-<h2 class="text-center mt-4"><%= @device.name %></h2>
-
-<div class="card-text text-center"><b><h4>Status: </h4></b></div>
-<div class="card-text text-center"><% Device::STATUSES.each do |status| %>
-    <%= link_to_unless @device.status.eql?(status.to_s), status, update_status_admin_device_path(@device, status: status), method: :patch %>
-  <% end %></div>
-
+<h2 class="text-center mt-4"><%= @device&.name %></h2>
 
 <div class="container">
   <div class="row justify-content-md-center">
@@ -22,13 +15,20 @@
                 <%= image_tag("default_image.jpg", :size => "360x280", :crop => :fill) %>
                 <% end %>   
                 <div class="card-text text-center"><b><h4>Description: </h4></b><%= @device.description %></div>
+
+                <% if @device.equipment.blank? %>
+                <h5 class="text-center">No devices found</h5>
+                <% else %>
+                <%= @device.equipment %>
+                <% end %>   
+
                 <div class="card-text text-center"><b><h4>Equipment: </h4></b><%= @device.equipment %></div>
                 <div class="card-text text-center"><b><h4>Price for 1 day: </h4></b><%= @device.price %> $</div>
 
-          <%= link_to "Edit", edit_admin_device_path(@device), class: "btn btn-outline-info" %>
-          <%= link_to "Delete", admin_device_path(@device), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>         
+          <%= link_to "Book", class: "btn btn-outline-info" %>                 
         </div>
       </div>
     </div>
   </div>
 </div>
+
