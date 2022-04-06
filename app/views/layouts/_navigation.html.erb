@@ -29,7 +29,19 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">            
           </a>
-        </li>      
+        </li>   
+    <% if user_signed_in? %>
+    <li class="nav-item"> 
+    <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>    
+    </li>
+     <% else %>
+    <li class="nav-item">
+        <%= link_to 'Log In', new_user_session_path, class: "nav-link" %>
+      </li>  
+      <li class="nav-item">
+      <%= link_to 'Sign Up', new_user_registration_path, class: "nav-link" %> 
+    </li>
+  <% end %>
      <ul class="nav navbar-nav navbar-right">
       <%= form_tag(admin_devices_path, :method => "get", id: "search-form-for") do %>
       <%= text_field_tag :search, params[:search], placeholder: "Search..." %>

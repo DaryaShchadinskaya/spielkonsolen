@@ -1,16 +1,5 @@
 <h1 class="text-center mt-4">This is the homepage with devices for users</h1>
 
-        <li class="nav-item">
-          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %> 
-        </li>
-
-        <li class="nav-item">
-          <%= link_to 'Log In', new_user_session_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Sign Up', new_user_registration_path, class: "nav-link" %> 
-        </li>
-          
 <div class="text-center flickr_pagination">
   <%= will_paginate @device, :container => false %>
 </div>
@@ -32,11 +21,9 @@
                 <%= image_tag("default_image.jpg", :size => "360x280", :crop => :fill) %>
                 <% end %>       
               </div>              
-                            
-                 <h5 class="card-title">Price for 1 day: <%= device.price %> $</h5>
-               
+                 <h5 class="card-title">Price for 1 day: <%= device.price %> $</h5>           
                 <%= link_to 'View details', device_url(device), class: "btn btn-outline-success" %> |             
-                <%= link_to 'Book device' %>                              
+                <%= link_to 'Book device', cart_path(device), class: "btn btn-outline-primary" %>                                 
          </div>
         </div>
       </div>

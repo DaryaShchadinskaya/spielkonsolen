@@ -4,10 +4,20 @@
 <h2 class="text-center mt-4"><%= @device.name %></h2>
 
 <div class="card-text text-center"><b><h4>Status: </h4></b></div>
-<div class="card-text text-center"><% Device::STATUSES.each do |status| %>
-    <%= link_to_unless @device.status.eql?(status.to_s), status, update_status_admin_device_path(@device, status: status), method: :patch %>
-  <% end %></div>
+<div class="card-text text-center">
+  <% Device::STATUSES.each do |status| %>
+    <%= link_to update_status_admin_device_path(@device, status: status), method: :patch do %>
+      <%= status %>
+    <% end %>
+  <% end %>
 
+    <%= button_to "Delete",
+  update_status_admin_device_path(@device),
+  method: :patch, 
+  form: { data: { confirm: "Are you sure?" } },
+  class: "btn btn-danger" %>
+
+</div>
 
 <div class="container">
   <div class="row justify-content-md-center">

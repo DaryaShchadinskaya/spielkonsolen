@@ -1,5 +1,5 @@
-class DevicesController < ApplicationController
-  
+class DevicesController < ApplicationController  
+
     def show      
       @device = Device.find(params[:id])    
     end
@@ -11,6 +11,7 @@ class DevicesController < ApplicationController
       else
         @devices = Device.all.order('created_at DESC')
       end
+      @order_items = current_order.order_items.new
     end
  
   end 

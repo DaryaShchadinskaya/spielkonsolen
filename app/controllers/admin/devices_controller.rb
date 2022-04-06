@@ -19,11 +19,12 @@ class Admin::DevicesController < Admin::BaseController
 
   def update_status
     @device = Device.find(params[:id])
-    params[:status].present? && Device::STATUSES.include?(params[:status].to_sym)
-    @device.update(status: params[:status])
-    redirect_to @device, notice: "Status changed to #{@device.status}"
+    if params[:status].present? && Device::STATUSES.include?(params[:status].to_sym)
+      @device.update(status: params[:status])
+    else
+    redirect_to admin_device_url(@device), notice: "Status updated to #{@device.status}"
+    end
   end
-
 
   def create
     @device = Device.new(device_params)  

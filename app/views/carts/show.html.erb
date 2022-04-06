@@ -1,0 +1,42 @@
+<h1 class="text-center mt-4">[USER] Booking</h1>
+ <div class="container">
+  <div id=cart-item>
+    <% @order_items.each do |item| %>
+      <h3><%= item.device.name%></h3>
+        <% if @item.device.image.attached? %>
+          <%= image_tag (@item.device.image), style: "width: 500px" %>  
+        <% else %>
+          <%= image_tag("default_image.jpg", :size => "360x280", :crop => :fill) %>
+        <% end %>   
+      <h3><%= item.device.price %></h3>
+    <%= form_with model: item do |f|%>
+      <%= f.hidden_field :device_id, value: item.device.id %>
+
+        <table>
+    <tr>
+      <td>
+      <div class="field">
+        <%= ff.label :start_date, "From" %><br />
+        <%= ff.date_select :start_date, :order => [:day, :month, :year],
+            :start_year => Date.current.year, :end_year => 1960,
+            :prompt => {day: 'Day', month: 'Month', year: 'Year'}, :discard_day => true, class: 'form-control' %>
+      </div>     
+      </td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      <td>
+      <div class="field">
+        <%= ff.label :end_date, "To" %><br />
+        <%= ff.date_select :end_date, :order => [:day, :month, :year], 
+            :start_year => Date.current.year + (10), :end_year => 1960,
+            :prompt => {day: 'Day', month: 'Month', year: 'Year'}, :discard_day => true, class: 'form-control'  %>            
+      </div>        
+      </td>
+    </tr>
+  </table>  
+      <%= form.submit "Submit" %>
+    <% end%>
+    <h2>Subtotal: <%= item.total %></h2>
+    <% end %>
+   <h3>Your current order has a total of: <%= current_order.subtotal %></h3>
+  </div>
+</div>
