@@ -1,15 +1,12 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   
-  helper_method :current_user, :logged_in?
+  helper_method :logged_in?
   before_action :authenticate_user!
+
 
   def set_search
     @q = Device.search(params[:q])
-  end
-
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
   def logged_in?

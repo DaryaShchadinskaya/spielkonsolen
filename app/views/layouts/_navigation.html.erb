@@ -1,6 +1,5 @@
 <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">    
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -10,38 +9,15 @@
       </button>
       <%= link_to "SPIELKONSOLEN", root_path, class: "navbar-brand", id: "logo" %>
     </div>
-    <!-- Collect the nav links, forms, and other content for navigation -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-       <%# <% if logged_in? && current_user.admin? %>
+       <% if logged_in? && current_user.admin? %>
             <li><%= link_to "Create", new_admin_device_url %></li>
-          <%# <% end %>       
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actions <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><%= link_to "New Console", new_admin_device_url %></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>   
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">            
-          </a>
-        </li>   
-    <% if user_signed_in? %>
-    <li class="nav-item"> 
-    <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>    
-    </li>
-     <% else %>
-    <li class="nav-item">
-        <%= link_to 'Log In', new_user_session_path, class: "nav-link" %>
-      </li>  
-      <li class="nav-item">
-      <%= link_to 'Sign Up', new_user_registration_path, class: "nav-link" %> 
-    </li>
-  <% end %>
+            <li>Your Profile (admin): <%= current_user.email %></li>
+            <% else %>
+          <li>Your Profile: <%= current_user.email %></li>    
+          
+          <% end %>  
      <ul class="nav navbar-nav navbar-right">
       <%= form_tag(admin_devices_path, :method => "get", id: "search-form-for") do %>
       <%= text_field_tag :search, params[:search], placeholder: "Search..." %>
@@ -49,14 +25,13 @@
       <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">           
-            <ul class="dropdown-menu">
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
-          </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+        <% if logged_in? %>
+          <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to 'Log in', new_user_session_path %></li>
+          <li><%= link_to 'Sign up', new_user_registration_path %></li>
+        <% end %>
+      </ul>     
+    </div>
+  </div>
 </nav>

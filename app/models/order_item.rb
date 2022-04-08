@@ -38,7 +38,6 @@ class OrderItem < ApplicationRecord
       end      
   end
 
-
   private
 
   def set_unit_price

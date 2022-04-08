@@ -18,12 +18,10 @@
                 <p class="card-text"><%= truncate(device.description, length: 500) %></p>
                 <li class="card-title">Equipment: <%= truncate(device.equipment, length: 500) %></li>
                 <li class="card-title">Price for 1 day: <%= device.price %> $</li>
-               
-                <%= link_to 'View details', admin_device_url(device), class: "btn btn-outline-success" %>
-                <%# <% if current_user.admin? %> 
+        
+                <%= link_to 'View details', admin_device_url(device), class: "btn btn-outline-success" %>                
                 <%= link_to 'Edit', edit_admin_device_path(device), class: "btn btn-outline-info" %>
-                <%= link_to 'Delete', admin_device_path(device), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>   
-                 <%# <% end %>  
+                <%= link_to 'Delete', admin_device_path(device), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %> 
          </div>
         </div>
       </div>
