@@ -5,18 +5,12 @@
 
 <div class="card-text text-center"><b><h4>Status: </h4></b></div>
 <div class="card-text text-center">
-  <% Device::STATUSES.each do |status| %>
-    <%= link_to update_status_admin_device_path(@device, status: status), method: :patch do %>
-      <%= status %>
-    <% end %>
-  <% end %>
 
     <%= button_to "Delete",
-  update_status_admin_device_path(@device),
-  method: :patch, 
-  form: { data: { confirm: "Are you sure?" } },
-  class: "btn btn-danger" %>
-
+          update_status_admin_device_path(@device),
+          method: :patch, 
+          form: { data: { confirm: "Are you sure?" } },
+          class: "btn btn-danger" %>
 </div>
 
 <div class="container">
@@ -34,7 +28,6 @@
                 <div class="card-text text-center"><b><h4>Description: </h4></b><%= @device.description %></div>
                 <div class="card-text text-center"><b><h4>Equipment: </h4></b><%= @device.equipment %></div>
                 <div class="card-text text-center"><b><h4>Price for 1 day: </h4></b><%= @device.price %> $</div>
-
           <%= link_to "Edit", edit_admin_device_path(@device), class: "btn btn-outline-info" %>
           <%= link_to "Delete", admin_device_path(@device), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>         
         </div>

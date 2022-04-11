@@ -11,19 +11,27 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-       <% if logged_in? && current_user.admin? %>
+        <% if logged_in? %>
+       <% if current_user.admin? %>
             <li><%= link_to "Create", new_admin_device_url %></li>
             <li>Your Profile (admin): <%= current_user.email %></li>
+
+            <ul class="nav navbar-nav navbar-right">
+              <%= form_tag(admin_devices_path, :method => "get", id: "search-form-for") do %>
+                <%= text_field_tag :search, params[:search], placeholder: "Search..." %>
+                <%= submit_tag "Search" %>
+              <% end %>
+            </ul>
             <% else %>
           <li>Your Profile: <%= current_user.email %></li>    
-          
+            <ul class="nav navbar-nav navbar-right">
+              <%= form_tag(devices_path, :method => "get", id: "search-form-for") do %>
+                <%= text_field_tag :search, params[:search], placeholder: "Search..." %>
+                <%= submit_tag "Search" %>
+            <% end %>
+            </ul>
+          <% end %> 
           <% end %>  
-     <ul class="nav navbar-nav navbar-right">
-      <%= form_tag(admin_devices_path, :method => "get", id: "search-form-for") do %>
-      <%= text_field_tag :search, params[:search], placeholder: "Search..." %>
-      <%= submit_tag "Search" %>
-      <% end %>
-      </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
           <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>

@@ -15,4 +15,3 @@ class DevicesController < ApplicationController
     end
  
   end 
-  

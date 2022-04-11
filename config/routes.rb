@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :admin do    
     resources :devices do      
-      member do
+      member do       
         get :purge_image 
         patch :update_status             
       end       

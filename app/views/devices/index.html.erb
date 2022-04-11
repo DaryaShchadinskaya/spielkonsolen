@@ -1,0 +1,35 @@
+<h1 class="text-center mt-4">[USER] Listing all consoles</h1>
+<% if (@devices) %>
+  <% if (@devices.empty?) %> 
+   <h5 class="text-center">No devices found</h5>
+  <% else %>
+<div class="text-center flickr_pagination">
+  <%= will_paginate @device, :container => false %>
+  </div>
+   <% @devices.each do |device| %>  
+    <div class="container">
+     <div class="row justify-content-md-center">
+      <div class="col-8 mt-4">
+        <div class="card text-center shadow mb-5 bg-white rounded">
+          <div class="card-header font-italic">          
+          <div class="card-body">          
+            <h5 class="card-title"><%= device.name %></h5>
+              <div class="form-group row">
+               <div class="field">
+                <% if device.image.attached? %>
+                <%= image_tag (device.image), style: "width: 500px" %>  
+                <% else %>
+                <%= image_tag("default_image.jpg", :size => "360x280", :crop => :fill) %>
+                <% end %>       
+              </div>              
+                 <h5 class="card-title">Price for 1 day: <%= device.price %> $</h5>           
+                <%= link_to 'View details', device_url(device), class: "btn btn-outline-success" %> |             
+                <%= link_to 'Book device', cart_path(device), class: "btn btn-outline-primary" %>   
+           </div>
+          </div>
+        </div>
+       </div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

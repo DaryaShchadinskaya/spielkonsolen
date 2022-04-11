@@ -5,7 +5,10 @@ class PagesController < ApplicationController
   end
 
   def index
-    @device = Device.paginate(page: params[:page], per_page: 10)
+    if current_user.admin?
+      redirect_to admin_devices_path
+    end    
+    @device = Device.actual.paginate(page: params[:page], per_page: 10)
     if params[:search]
       @devices = Device.search(params[:search]).order("created_at DESC")
     else

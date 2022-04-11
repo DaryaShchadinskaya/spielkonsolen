@@ -14,7 +14,7 @@
           <div class="card-header font-italic">          
           <div class="card-body">
           <li class="card-title"><strong>Status: </strong><%= device.status %></li>
-            <h5 class="card-title"><%= link_to device.name, admin_device_url(device), class: "text-success" %></h5>
+             <h5 class="card-title"><%= device.name %></h5>
               <div class="form-group row">
                <div class="field">
                 <% if device.image.attached? %>
