@@ -3,11 +3,15 @@
 
 <h2 class="text-center mt-4"><%= @device.name %></h2>
 
-<div class="card-text text-center"><b><h4>Status: </h4></b></div>
-<div class="card-text text-center">
 
+       <% if @device.status == 'deleted' %>
+            <div class="card-text text-center"><b><h4>Status: <%= @device.status %></h4></b></div>
+       <% end %> 
+
+
+<div class="card-text text-center">
     <%= button_to "Delete",
-          update_status_admin_device_path(@device),
+          update_status_admin_device_path(@device, status: 'deleted'),
           method: :patch, 
           form: { data: { confirm: "Are you sure?" } },
           class: "btn btn-danger" %>

@@ -1,3 +1,4 @@
+
 <h1 class="text-center mt-4">[ADMIN] Listing all consoles</h1>
 <% if (@devices) %>
   <% if (@devices.empty?) %> 
@@ -5,15 +6,19 @@
   <% else %>
 <div class="text-center flickr_pagination">
   <%= will_paginate @device, :container => false %>
-  </div>
-   <% @devices.each do |device| %>  
+</div>
+
+<div class="container">
+<% @devices.each do |device| %>  
     <div class="container">
      <div class="row justify-content-md-center">
       <div class="col-8 mt-4">
         <div class="card text-center shadow mb-5 bg-white rounded">
           <div class="card-header font-italic">          
           <div class="card-body">
-          <li class="card-title"><strong>Status: </strong><%= device.status %></li>
+            <% if device.status == 'deleted' %>
+              <div class="card-text text-center"><b><h4>Status: <%= device.status %></h4></b></div>
+            <% end %> 
              <h5 class="card-title"><%= device.name %></h5>
               <div class="form-group row">
                <div class="field">
@@ -37,5 +42,9 @@
        </div>
       </div>
     <% end %>
-  <% end %>
+</div>
 <% end %>
+<% end %>
+<div class="text-center flickr_pagination">
+  <%= will_paginate @device, :container => false %>
+</div>

@@ -6,7 +6,10 @@
 <div class="text-center flickr_pagination">
   <%= will_paginate @device, :container => false %>
   </div>
+
+<% if device.status.actual? do %>
    <% @devices.each do |device| %>  
+ 
     <div class="container">
      <div class="row justify-content-md-center">
       <div class="col-8 mt-4">
@@ -32,4 +35,5 @@
       </div>
     <% end %>
   <% end %>
+<% end %> 
 <% end %>

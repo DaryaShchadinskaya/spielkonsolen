@@ -1,8 +1,7 @@
 class Admin::DevicesController < Admin::BaseController
-  before_action :set_device, only: [:show, :edit, :update, :destroy, :purge_image]
+  before_action :set_device, only: %i[show edit update destroy purge_image]
 
-  def show          
-  end
+  def show; end
 
   def new
     @device = Device.new
@@ -10,11 +9,11 @@ class Admin::DevicesController < Admin::BaseController
 
   def index
     @device = Device.paginate(page: params[:page], per_page: 10)
-    if params[:search]
-      @devices = Device.search(params[:search]).order("created_at DESC")
-    else
-      @devices = Device.all.order('created_at DESC')
-    end
+    @devices = if params[:search]
+                 Device.search(params[:search]).order('created_at DESC')
+               else
+                 Device.all.order('created_at DESC')
+               end
   end
 
   def update_status
@@ -25,10 +24,10 @@ class Admin::DevicesController < Admin::BaseController
   end
 
   def create
-    @device = Device.new(device_params)  
+    @device = Device.new(device_params)
     if @device.valid?
       @device.save
-      flash[:success] = "Console was created successfully"
+      flash[:success] = 'Console was created successfully'
       redirect_to admin_devices_path
     else
       flash[:error] = @device.errors
@@ -38,7 +37,7 @@ class Admin::DevicesController < Admin::BaseController
 
   def update
     if @device.update(device_params)
-      flash[:notice] = "Console was updated successfully."
+      flash[:notice] = 'Console was updated successfully.'
       redirect_to admin_device_url(@device)
     else
       render 'edit'
@@ -46,16 +45,15 @@ class Admin::DevicesController < Admin::BaseController
   end
 
   def edit
-    @device = Device.find(params[:id])  
+    @device = Device.find(params[:id])
   end
 
   def purge_image
     @device = Device.find(params[:id])
     @device.image.purge
-    redirect_back fallback_location: admin_devices_path, notice: "Success"
+    redirect_back fallback_location: admin_devices_path, notice: 'Success'
   end
 
-  
   def destroy
     @device = Device.find(params[:id])
     @device.destroy
@@ -82,5 +80,3 @@ class Admin::DevicesController < Admin::BaseController
     ActiveStorage::Attached::One.new('image', Device.find(id), dependent: :purge_later)
   end
 end
-
-

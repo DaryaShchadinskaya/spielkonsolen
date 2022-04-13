@@ -1,10 +1,15 @@
 <h1 class="text-center mt-4">This is the homepage with devices for users</h1>
 
-<div class="text-center flickr_pagination">
-  <%= will_paginate @device, :container => false %>
-</div>
+<% if (@devices) %>
+  <% if (@devices.empty?) %> 
+   <h5 class="text-center">No devices found</h5>
+  <% else %>
+    <div class="text-center flickr_pagination">
+      <%= will_paginate @device, :container => false %>
+    </div>
 
 <div class="container">
+ <% if (@devices.actual?) %> 
   <% @device.each do |device| %>
     <div class="row justify-content-md-center">
       <div class="col-8 mt-4">
@@ -16,9 +21,9 @@
 
                <div class="field">
                 <% if device.image.attached? %>
-                <%= image_tag (device.image), style: "width: 500px" %>  
+                  <%= image_tag (device.image), style: "width: 500px" %>  
                 <% else %>
-                <%= image_tag("default_image.jpg", :size => "360x280", :crop => :fill) %>
+                  <%= image_tag("default_image.jpg", :size => "360x280", :crop => :fill) %>
                 <% end %>       
               </div>              
                  <h5 class="card-title">Price for 1 day: <%= device.price %> $</h5>           
@@ -28,8 +33,11 @@
         </div>
       </div>
     </div>
-  <% end %>
+<% end %>
+<% end %>
 </div>
+ <% end %>
+  <% end %>
 
 <div class="text-center flickr_pagination">
   <%= will_paginate @device, :container => false %>
