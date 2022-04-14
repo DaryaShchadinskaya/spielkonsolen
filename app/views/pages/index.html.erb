@@ -4,12 +4,12 @@
   <% if (@devices.empty?) %> 
    <h5 class="text-center">No devices found</h5>
   <% else %>
-    <div class="text-center flickr_pagination">
-      <%= will_paginate @device, :container => false %>
-    </div>
+<div class="text-center flickr_pagination">
+  <%= will_paginate @device, :container => false %>
+  </div>
 
 <div class="container">
- <% if (@devices.actual?) %> 
+
   <% @device.each do |device| %>
     <div class="row justify-content-md-center">
       <div class="col-8 mt-4">
@@ -34,7 +34,7 @@
       </div>
     </div>
 <% end %>
-<% end %>
+
 </div>
  <% end %>
   <% end %>

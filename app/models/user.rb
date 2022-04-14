@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :order
+  # has_many :order
 
   before_save { self.email = email.downcase }
 

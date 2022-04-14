@@ -18,7 +18,7 @@ class Admin::DevicesController < Admin::BaseController
 
   def update_status
     @device = Device.find(params[:id])
-    params[:status].present? && Device::STATUSES.include?(params[:status].to_sym)
+    params[:status].present? && Device.statuses.keys.include?(params[:status].to_sym)
     @device.update(status: params[:status])
     redirect_to admin_device_url(@device), notice: "Status updated to #{@device.status}"
   end

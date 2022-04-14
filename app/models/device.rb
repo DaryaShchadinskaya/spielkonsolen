@@ -8,7 +8,7 @@ class Device < ApplicationRecord
   validates :image, blob: { content_type: ['image/jpg', 'image/jpeg', 'image/png'], size_range: 1..10.megabytes }
   validates :status, presence: true
 
-  STATUSES = [:actual, :deleted]
+  enum :status, [:actual, :deleted]
 
   def self.search(search)
     where('name LIKE ?', "%#{search}%")

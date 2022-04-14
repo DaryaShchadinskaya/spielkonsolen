@@ -8,3 +8,6 @@ user = User.create(
     )
     device.save!
     
+# CART
+Cart.destroy_all
+puts "\nTotal cart count: #{Cart.all.count}"

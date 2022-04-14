@@ -7,9 +7,8 @@
   <%= will_paginate @device, :container => false %>
   </div>
 
-<% if device.status.actual? do %>
+
    <% @devices.each do |device| %>  
- 
     <div class="container">
      <div class="row justify-content-md-center">
       <div class="col-8 mt-4">
@@ -26,14 +25,17 @@
                 <% end %>       
               </div>              
                  <h5 class="card-title">Price for 1 day: <%= device.price %> $</h5>           
-                <%= link_to 'View details', device_url(device), class: "btn btn-outline-success" %> |             
-                <%= link_to 'Book device', cart_path(device), class: "btn btn-outline-primary" %>   
+                <%= link_to 'View details', device_url(device), class: "btn btn-outline-success" %> |        
+                <%= button_to "Book device", order_items_path(:device_id => device.id) %>   
            </div>
           </div>
         </div>
        </div>
-      </div>
-    <% end %>
+
   <% end %>
 <% end %> 
 <% end %>
+
+<div class="text-center flickr_pagination">
+  <%= will_paginate @device, :container => false %>
+</div>
