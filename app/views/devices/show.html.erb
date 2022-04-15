@@ -21,7 +21,7 @@
           <% else %>
           <div class="card-text text-center"><b><h4>Description: </h4></b><%= @device.description %></div>
           <% end %>  
-          <%= link_to 'Book device', cart_path(@device), class: "btn btn-outline-primary" %>                       
+           <%= button_to "Book device", order_items_path(:device_id => @device.id) %>           
         </div>
       </div>
     </div>

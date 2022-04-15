@@ -1,22 +1,29 @@
-<%# <div id="cart-item">
-    <%= render 'cart_items'%>
-<%# </div> %> 
+<h1 class="text-center mt-4">[USER] Booking/Cart show</h1>
+ <div class="container">
+  <div id=cart-item>
 
-<h2>Cart show</h2>
-<ul>
   <% @cart.order_items.each do |order_item| %>
-    <li>Item: <%= order_item.device.name %>/ Price: <%= number_to_currency(order_item.product.price) %>/ Quantity: <%= order_item.quantity %>/ Total Price: <%= number_to_currency(order_item.total_price) %>
-    <ul>
+    <li>Device: <%= order_item.device.name %>
+     <% if @item.device.image.attached? %>
+          <%= image_tag (@item.device.image), style: "width: 500px" %>  
+        <% else %>
+          <%= image_tag("default_image.jpg", :size => "360x280", :crop => :fill) %>
+        <% end %>   
+    Price: <%= number_to_currency(order_item.device.price) %>
+    Quantity: <%= order_item.quantity %>
+    Total Price: <%= number_to_currency(order_item.total_price) %>
+    </li>
+          <%# <li> %>
+        <%# <%= link_to "Add one", order_item_add_path(:id => order_item), method: :post %> 
+        <%# <%= link_to "Reduce one", order_item_reduce_path(:id => order_item), method: :post %> 
+      <%# </li> %>
       <li>
-        <%= link_to "Add one", order_item_add_path(:id => order_item), method: :post %>
-        <%= link_to "Reduce one", order_item_reduce_path(:id => order_item), method: :post %>
-      </li>
-      <li>
-        <%= link_to "Remove item", order_item_path(order_item), method: :delete %>
+        <%= link_to "Remove device", order_item_path(order_item), method: :delete %>
       </li>
     </ul>
   <% end %>
-</ul>
-<h3>Sub total: <%= number_to_currency(@cart.sub_total) %></h3>
+  </div>
+</div>
+<h3>Subtotal: <%= number_to_currency(@cart.sub_total) %></h3>
 <%= link_to "Empty cart", cart_path(@current_cart),method: :delete, data: {confirm: "Are you sure?"} %>
-<%= link_to "Remove item", order_item_path(order_item), method: :delete %>
+

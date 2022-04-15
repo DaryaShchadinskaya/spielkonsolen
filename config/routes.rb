@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :order_items
-  resources :carts, only: [:show]
   resources :devices
   resources :orders
 
@@ -18,7 +17,15 @@ Rails.application.routes.draw do
   root 'pages#index'
   get 'index', to: 'pages#index'
 
+  get 'carts/:id' => 'carts#show', as: 'cart'
   delete 'carts/:id' => 'carts#destroy'
+
+  # That's for the future
+
+  # post 'order_items/:id/add' => "order_items#add_quantity", as: "order_item_add"
+  # post 'order_items/:id/reduce' => "order_items#reduce_quantity", as: "order_item_reduce"
+
   post 'order_items' => 'order_items#create'
   delete 'order_items/:id' => 'order_items#destroy'
+
 end
