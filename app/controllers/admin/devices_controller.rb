@@ -1,5 +1,5 @@
 class Admin::DevicesController < Admin::BaseController
-  before_action :set_device, only: %i[show edit update destroy purge_image]
+  before_action :set_device, only: %i[show edit update destroy purge_image update_status]
 
   def show; end
 
@@ -17,7 +17,6 @@ class Admin::DevicesController < Admin::BaseController
   end
 
   def update_status
-    @device = Device.find(params[:id])
     params[:status].present? && Device.statuses.keys.include?(params[:status].to_sym)
     @device.update(status: params[:status])
     redirect_to admin_device_url(@device), notice: "Status updated to #{@device.status}"
@@ -44,18 +43,14 @@ class Admin::DevicesController < Admin::BaseController
     end
   end
 
-  def edit
-    @device = Device.find(params[:id])
-  end
+  def edit; end
 
   def purge_image
-    @device = Device.find(params[:id])
     @device.image.purge
     redirect_back fallback_location: admin_devices_path, notice: 'Success'
   end
 
   def destroy
-    @device = Device.find(params[:id])
     @device.destroy
     redirect_to admin_device_path(@device)
   end

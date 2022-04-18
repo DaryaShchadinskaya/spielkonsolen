@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :admin do
+    resources :orders do
+      member do
+        get :orders
+      end
+    end
     resources :devices do
       member do
         get :purge_image
@@ -14,18 +19,17 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'pages#index'
-  get 'index', to: 'pages#index'
+  root 'devices#index'
+  get 'index', to: 'devices#index'
 
   get 'carts/:id' => 'carts#show', as: 'cart'
   delete 'carts/:id' => 'carts#destroy'
+
+  post 'order_items' => 'order_items#create'
+  delete 'order_items/:id' => 'order_items#destroy'
 
   # That's for the future
 
   # post 'order_items/:id/add' => "order_items#add_quantity", as: "order_item_add"
   # post 'order_items/:id/reduce' => "order_items#reduce_quantity", as: "order_item_reduce"
-
-  post 'order_items' => 'order_items#create'
-  delete 'order_items/:id' => 'order_items#destroy'
-
 end

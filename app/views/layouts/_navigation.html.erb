@@ -13,6 +13,7 @@
       <ul class="nav navbar-nav">       
        <% if current_user %>
             <li><%= link_to "Create", new_admin_device_url %></li>
+            <li><%= link_to "Orders", admin_orders_url %></li>
             <li>Your Profile (admin): <%= current_user.email %></li>
             <ul class="nav navbar-nav navbar-right">
               <%= form_tag(admin_devices_path, :method => "get", id: "search-form-for") do %>
