@@ -20,8 +20,7 @@
                 <li class="card-title">Price for 1 day: <%= device.price %> $</li>
         
                 <%= link_to 'View details', admin_device_url(device), class: "btn btn-outline-success" %>                
-                <%= link_to 'Edit', edit_admin_device_path(device), class: "btn btn-outline-info" %>
-                <%= link_to 'Delete', admin_device_path(device), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %> 
+                <%= link_to 'Edit', edit_admin_device_path(device), class: "btn btn-outline-info" %>               
          </div>
         </div>
       </div>

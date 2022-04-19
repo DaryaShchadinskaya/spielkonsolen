@@ -218,6 +218,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    select_all-rails (0.3.2)
     selenium-webdriver (4.1.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -287,6 +288,7 @@ DEPENDENCIES
   ransack
   redis (~> 4.0)
   sassc-rails (>= 2.1.0)
+  select_all-rails
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
