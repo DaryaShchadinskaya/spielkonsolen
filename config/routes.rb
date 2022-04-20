@@ -16,12 +16,11 @@ Rails.application.routes.draw do
         get :purge_image
         patch :update_status
       end
-      # collection do
-      #   delete 'destroy_multiple'
-      # end
+      collection do
+        delete 'destroy_multiple'
+      end
     end
   end
-
 
   root 'devices#index'
   get 'index', to: 'devices#index'

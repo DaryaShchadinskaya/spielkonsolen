@@ -1,47 +1,50 @@
 <h1 class="text-center mt-4">[ADMIN] Listing all consoles</h1>
 <% if (@devices) %>
-  <% if (@devices.empty?) %> 
-   <h5 class="text-center">No devices found</h5>
-  <% else %>
-<div class="text-center flickr_pagination">
-  <%= will_paginate @device, :container => false %>
-</div>
-<%= form_tag admin_devices_path, method: :post do %>
-<table class="footable table table-bordered toggle-arrow-tiny" data-page-size="31" >
-<thead>
-<tr>
-  <th><center>Status</center></th>
-  <th><center>Image</center></th>
-  <th><center>Name</center></th>
-  <th><center>Description</center></th>
-  <th><center>Equipment</center></th>
-  <th><center>Price for 1 day, $</center></th>
-  <th><center>Action</center></th>
-  <th><input type="checkbox" id="selectAll"></input> Select all</th>
-</tr>
-</thead>
-<tbody>
-<% @devices.each do |device| %>
-  <tr>
-    <td><%= device.status %></td>
-    <td><% if device.image.attached? %>
-        <%= image_tag (device.image), style: "width: 300px" %>  
-        <% else %>
-        <%= image_tag("default_image.jpg", :size => "360x280", :crop => :fill) %>
-        <% end %>  </td>
-    <td><%= device.name %></td>
-    <td><%= truncate(device.description, length: 500) %></td>
-    <td><%= truncate(device.equipment, length: 500)  %></td>
-    <td><%= device.price %></td>
-    <td><%= link_to 'View details', admin_device_url(device), class: "btn btn-outline-success" %>                
-        <%= link_to 'Edit', edit_admin_device_path(device), class: "btn btn-outline-info" %>   </td>
-    <td><%= check_box_tag "device_ids[]", device.id, false, class: 'selectable' %></td>
-  </tr>
+    <% if (@devices.empty?) %> 
+     <h5 class="text-center">No devices found</h5>
+    <% else %>
+    <div class="text-center flickr_pagination">
+      <%= will_paginate @device, :container => false %>
+    </div>
+    <%= form_tag destroy_multiple_admin_devices_path, method: :delete do %>
+      <table class="footable table table-bordered toggle-arrow-tiny" data-page-size="31" >
+        <thead>
+        <tr>
+          <th><center>Status</center></th>
+          <th><center>Image</center></th>
+          <th><center>Name</center></th>
+          <th><center>Description</center></th>
+          <th><center>Equipment</center></th>
+          <th><center>Price for 1 day, $</center></th>
+          <th><center>Action</center></th>
+          <th data-sort-ignore="true"><input type="checkbox" id="selectAll"></input> <%= submit_tag "Delete selected", :class => 'btn btn-primary btn-xs' %></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @devices.each do |device| %>
+          <tr>
+            <td><%= device.status %></td>
+            <td><% if device.image.attached? %>
+                <%= image_tag (device.image), style: "width: 300px" %>  
+                <% else %>
+                <%= image_tag("default_image.jpg", :size => "360x280", :crop => :fill) %>
+                <% end %>  </td>
+            <td><%= device.name %></td>
+            <td><%= truncate(device.description, length: 500) %></td>
+            <td><%= truncate(device.equipment, length: 500)  %></td>
+            <td><%= device.price %></td>
+            <td><%= link_to 'View details', admin_device_url(device), class: "btn btn-outline-success" %>                
+                <%= link_to 'Edit', edit_admin_device_path(device), class: "btn btn-outline-info" %>   </td>
+            <td><%= check_box_tag "device_ids[]", device.id, false, class: 'selectable' %></td>
+          </tr>
+        <% end %>
+        </tbody>
+        <tfoot>
+        </tfoot>
+      </table>
+    <% end %>
+  <% end %>
 <% end %>
-</tbody>
-<tfoot>
-</tfoot>
-</table>
-<% end %>
-<% end %>
-<% end %>
+
+
+

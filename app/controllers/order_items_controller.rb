@@ -1,12 +1,9 @@
 class OrderItemsController < ApplicationController
   def create
     chosen_device = Device.find(params[:device_id])
-    current_cart = @current_cart
-    @order_item = OrderItem.new
-    @order_item.cart = current_cart
-    @order_item.device = chosen_device
-    @order_item.save
-    redirect_to cart_path(current_cart)
+    cart = current_cart
+    @order = Order.create(cart: cart, device: chosen_device)
+    redirect_to cart_path(cart)
   end
 
   # def create

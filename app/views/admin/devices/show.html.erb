@@ -7,7 +7,7 @@
         <%= button_to "Delete",
               update_status_admin_device_path(@device, status: 'deleted'),
               method: :patch, 
-              form: { data: { confirm: "Are you sure?" } },
+              form: { data: { confirm: "Are you sure you want to delete the product?" } },
               class: "btn btn-danger" %>
     </div>
 <div class="container">

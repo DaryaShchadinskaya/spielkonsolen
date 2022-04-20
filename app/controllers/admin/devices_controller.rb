@@ -56,13 +56,13 @@ class Admin::DevicesController < Admin::BaseController
   # end
 
 
-  # def destroy_multiple
-  #   Device.destroy(params[:device_ids])
-  #   respond_to do |format|
-  #     format.html { redirect_to admin_devices_url }
-  #     format.json { head :no_content }
-  #   end
-  # end
+  def destroy_multiple
+    Device.destroy(params[:device_ids])
+    respond_to do |format|
+      format.html { redirect_to admin_devices_url }
+      format.json { head :no_content }
+    end
+  end
 
   def delete_image_attachment
     @image = ActiveStorage::Attachment.find(params[:id])

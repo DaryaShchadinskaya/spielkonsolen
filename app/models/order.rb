@@ -1,7 +1,9 @@
 class Order < ApplicationRecord
-  has_many :order_items, dependent: :destroy
-  before_save :set_subtotal
+  # has_many :order_items, dependent: :destroy
+  belongs_to :cart
+  belongs_to :device
 
+  before_save :set_subtotal
   # validates :name, presence: true, length: { minimum: 2, maximum: 100 }
   # validates :equipment, presence: true, length: { minimum: 2, maximum: 500 }
   # validates :price, numericality: { greater_than_or_equal_to: 0, less_than: BigDecimal(10**7) }
