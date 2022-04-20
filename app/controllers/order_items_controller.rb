@@ -1,9 +1,12 @@
 class OrderItemsController < ApplicationController
+  before_action :set_device
+
   def create
-    chosen_device = Device.find(params[:device_id])
-    cart = current_cart
-    @order = Order.create(cart: cart, device: chosen_device)
-    redirect_to cart_path(cart)
+    # chosen_device = Device.find(params[:device_id])
+    # binding.pry
+    @order = Order.create(device: @device)
+    # cart = current_cart
+    redirect_to order_path(@order)
   end
 
   # def create
@@ -19,12 +22,16 @@ class OrderItemsController < ApplicationController
   # end
 
   def destroy
-    @order_item = OrderItem.find(params[:id])
+    # @order_item = OrderItem.find(params[:id])
     @order_item.destroy
     redirect_to cart_path(@current_cart)
   end
 
   private
+
+  def set_device
+    @device = Device.find(params[:device_id])
+  end
 
   def order_item_params
     params.require(:order_item).permit(:quantity, :device_id, :cart_id)

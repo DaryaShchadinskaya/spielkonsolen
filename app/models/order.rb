@@ -1,6 +1,5 @@
 class Order < ApplicationRecord
-  # has_many :order_items, dependent: :destroy
-  belongs_to :cart
+  # belongs_to :cart
   belongs_to :device
 
   before_save :set_subtotal
@@ -9,9 +8,9 @@ class Order < ApplicationRecord
   # validates :price, numericality: { greater_than_or_equal_to: 0, less_than: BigDecimal(10**7) }
   # validates :image, blob: { content_type: ['image/jpg', 'image/jpeg', 'image/png'], size_range: 1..10.megabytes }
 
-  def subtotal
-    order_items.collect { |order_item| order_item.valid? ? (order_item.unit_price * order_item.quantity) : 0 }.sum
-  end
+  # def subtotal
+  #   order_items.collect { |order_item| order_item.valid? ? (order_item.unit_price * order_item.quantity) : 0 }.sum
+  # end
 
   private
 

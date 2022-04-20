@@ -3,6 +3,8 @@ class CreateOrders < ActiveRecord::Migration[7.0]
     create_table :orders do |t|
       t.decimal :subtotal
       t.decimal :total
+      t.belongs_to :device
+
       t.timestamps
     end
   end
