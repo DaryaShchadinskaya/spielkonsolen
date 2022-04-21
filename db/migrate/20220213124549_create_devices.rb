@@ -6,6 +6,8 @@ class CreateDevices < ActiveRecord::Migration[7.0]
       t.string :equipment
       t.decimal :price
       t.integer :status, default: 0
+      t.references :orders
+
       t.timestamps
     end
   end
