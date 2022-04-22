@@ -27,7 +27,7 @@
               </div>              
                  <h5 class="card-title">Price for 1 day: <%= device.price %> $</h5>           
                 <%= link_to 'View details', device_url(device), class: "btn btn-outline-success" %> |        
-               <%= button_to "Book device", order_items_path(:device_id => device.id) %>          
+               <%= button_to "Book device", orders_path(:device_id => device.id) %>          
             </div>
             </div>
           </div>

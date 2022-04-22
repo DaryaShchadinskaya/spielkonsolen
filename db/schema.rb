@@ -54,7 +54,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_05_141534) do
   create_table "orders", force: :cascade do |t|
     t.decimal "subtotal"
     t.decimal "total"
-    t.integer "device_id"
+    t.integer "quantity"
+    t.integer "device_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["device_id"], name: "index_orders_on_device_id"

@@ -1,0 +1,33 @@
+<h2>Order create</h2>
+   <div class="table-responsive">
+     <table class="table table-hover table-striped">
+       <thead>
+        <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+<div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-8 mt-4">
+        <div class="card text-center shadow mb-5 bg-white rounded">
+         <div class="card-header font-italic">          
+          <div class="card-body">
+            <h5 class="card-title"><%= device.name %></h5>
+              <div class="form-group row">
+               <div class="field">
+                <% if device.image.attached? %>
+                  <%= image_tag (device.image), style: "width: 500px" %>  
+                <% else %>
+                  <%= image_tag("default_image.jpg", :size => "360x280", :crop => :fill) %>
+                <% end %>       
+              </div>             
+          <td>Total: </td>
+            </div>
+            </div>
+          </div>
+        </div>
+    </table>
+   </div>
+</div>
