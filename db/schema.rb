@@ -52,9 +52,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_05_141534) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.decimal "subtotal"
-    t.decimal "total"
-    t.integer "quantity"
+    t.decimal "total_price"
+    t.integer "quantity", default: 1
+    t.string "phone_number"
+    t.string "email"
+    t.string "address"
+    t.string "full_name"
+    t.string "date_of_booking"
+    t.string "delivery"
     t.integer "device_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

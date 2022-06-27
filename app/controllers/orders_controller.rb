@@ -1,24 +1,39 @@
 class OrdersController < ApplicationController
+  before_action :set_device, only: %i[create]
+  skip_before_action :verify_authenticity_token
+
+  def new
+    @order = Order.new
+  end
+
   def create
     @order = Order.create(device: @device)
-    #  binding.pry
-    redirect_to orders_path
+    if @order.save
+      OrderMailer.with(order: @order).new_order_email.deliver_later
+      flash[:success] = "Thank you for your booking! We'll get contact you soon!"
+      redirect_to devices_path
+    else
+      flash[:error] = @order.errors
+      render 'new'
+    end
   end
 
   def show
     @order = Order.find(params[:id])
-    @device = @order.device
+    @order = @order.device
   end
 
-  # def destroy
-  #   # @order_item = OrderItem.find(params[:id])
-  #   device.destroy
-  #   redirect_to order_path(@order)
-  # end
-
-  # privat
+  private
 
   # def order_params
-  #   params.require(:order).permit(:device_id, :quantity)
+  #   params.require(:order).permit(:name, :email, :address, :phone_number)
   # end
+
+  def set_device
+    @device = Device.find(params[:device_id])
+  end
+
+  def device_params
+    params.require(:device).permit(:name, :equipment, :description, :price, :image)
+  end
 end

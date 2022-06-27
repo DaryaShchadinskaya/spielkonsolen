@@ -1,0 +1,106 @@
+<h1 class="text-center mt-4">[USER] Booking device</h1>
+<div class="table-responsive">
+<div class="container">
+ <table class="table table-hover table-striped">
+
+  <thead>
+  <tr>
+   <th>Device name </th>  
+   <th>Image</th> 
+   <th>Price, $</th>
+   <th>Term of booking, days</th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <% qty = [] %>
+    <% sum = [] %>
+    <tr>
+    <td><%= @order.device.name %></td>
+    <td>
+      <% if @device.image.attached? %>
+        <%= image_tag (@device.image), style: "width: 500px" %>  
+      <% else %>
+        <%= image_tag("default_image.jpg", :size => "360x280", :crop => :fill) %>
+      <% end %>   
+      </td>
+    <td><%= @order.device.price %></td>
+
+      <%# <td>
+      <% qty << @order.quantity %>
+      <%# <%= @order.quantity %>
+      <%# </td> %> 
+<%# <td>
+      <% pr = order.quantity * order.device.price %>
+        <%# <% sum << pr %> 
+<%# </td> %>
+  </tbody>
+</table>
+</div>
+</div>
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <%= render 'shared/errors', obj: @order %>
+      <%= form_with(model: [@order], class: "shadow p-3 mb-3 bg-info rounded", local: true) do |f| %>
+
+        <div class="form-group mb-3">
+          <%= f.label :Term_of_booking, class: "col-2 col-form-label text-light" %>
+          <div class="col-10">
+            <%= f.text_field :quantity, required: true, class: "form-control shadow rounded", placeholder: "Term of booking, days" %>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :phone_number, class: "col-2 col-form-label text-light" %>
+          <div class="col-10"> 
+            <%= f.text_area :phone_number, required: true, rows: 5, class: "form-control shadow rounded", placeholder: "Enter your phone number" %>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :date_of_booking, class: "col-2 col-form-label text-light" %>
+          <div class="col-10"> 
+            <%= f.text_area :date_of_booking, required: true, rows: 5, class: "form-control shadow rounded", placeholder: "Select start of booking" %>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :email, class: "col-2 col-form-label text-light" %>
+          <div class="col-10"> 
+            <%= f.text_area :email, required: true, rows: 5, class: "form-control shadow rounded", placeholder: "Enter your email" %>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :delivery, class: "col-2 col-form-label text-light" %>
+          <div class="col-10"> 
+            <%= f.text_area :delivery, required: true, rows: 5, class: "form-control shadow rounded", placeholder: "Enter delivery" %>
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <%= f.label :address, class: "col-2 col-form-label text-light" %>
+          <div class="col-10"> 
+            <%= f.text_area :address, required: true, rows: 5, class: "form-control shadow rounded", placeholder: "Enter the address" %>
+          </div>
+        </div>
+
+
+        <div class="form-group mb-3">
+          <%= f.label :full_name, class: "col-2 col-form-label text-light" %>
+          <div class="col-10"> 
+            <%= f.text_area :full_name, required: true, rows: 5, class: "form-control shadow rounded", placeholder: "Enter your full name" %>
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-center"> 
+          <%= f.submit "Submit", :class => 'btn btn-outline-light btn-lg' %>    
+          <%= link_to "Cancel", devices_path, data: { confirm: 'Are you sure?' } %>           
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :devices
-  resources :orders
+  resources :orders, only: %i[create new show]
+
+  post 'orders' => 'orders#create'
+  delete 'orders/:id' => 'orders#destroy'
 
   devise_for :users
 
@@ -12,8 +15,9 @@ Rails.application.routes.draw do
     end
     resources :devices do
       member do
-        get :purge_image
+        get   :purge_image
         patch :update_status
+        post  :order
       end
       collection do
         delete 'destroy_multiple'
@@ -23,10 +27,6 @@ Rails.application.routes.draw do
 
   root 'devices#index'
   get 'index', to: 'devices#index'
-
-
-  post 'orders' => 'orders#create'
-  delete 'orders/:id' => 'orders#destroy'
 
   # That's for the future
 

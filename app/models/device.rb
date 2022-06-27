@@ -7,7 +7,7 @@ class Device < ApplicationRecord
   validates :price, numericality: { greater_than_or_equal_to: 0, less_than: BigDecimal(10**7) }
   validates :image, blob: { content_type: ['image/jpg', 'image/jpeg', 'image/png'], size_range: 1..10.megabytes }
 
-  enum :status, [:actual, :deleted]
+  enum :status, %i[actual deleted]
 
   def self.search(search)
     where('name LIKE ?', "%#{search}%")

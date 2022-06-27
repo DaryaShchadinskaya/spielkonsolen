@@ -17,11 +17,11 @@
           <div class="card-text text-center"><b><h4>Equipment: </h4></b><%= @device.equipment %></div>
           <div class="card-text text-center"><b><h4>Price for 1 day: </h4></b><%= @device.price %> $</div>
           <% if @device.description.blank? %>
-          <div class="card-text text-center"><b><h4>Description: </h4></b>Empty</div>          
+          <div class="card-text text-center"><b><h4>Description: </h4></b>Empty</div>
           <% else %>
           <div class="card-text text-center"><b><h4>Description: </h4></b><%= @device.description %></div>
           <% end %>  
-           <%= button_to "Book device", order_items_path(:device_id => @device.id) %>           
+           <%= button_to "Book device", orders_path(:device_id => @device.id) %>
         </div>
       </div>
     </div>

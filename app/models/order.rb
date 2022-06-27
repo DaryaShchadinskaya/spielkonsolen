@@ -1,16 +1,15 @@
 class Order < ApplicationRecord
   belongs_to :device
 
-  # before_save :set_subtotal
-  # validates :quantity, presence: true
+  validates :quantity, presence: true, length: { maximum: 1_000_000 }
+  validates :phone_number, presence: true, uniqueness: true, length: { maximum: 20 }
+  validates :email, presence: true, uniqueness: true, length: { minimum: 5, maximum: 100 }
+  validates :delivery, presence: true
+  validates :full_name, presence: true, uniqueness: { case_sensitive: false }, length: { minimum: 1, maximum: 100 }
+  validates :date_of_booking, presence: true
 
-  # def subtotal
-  #   order_items.collect { |order_item| order_item.valid? ? (order_item.unit_price * order_item.quantity) : 0 }.sum
-  # end
-
-  # private
-
-  # def set_subtotal
-  #   self[:subtotal] = subtotal
+  # def total_price
+  #   order.quantity * order.device.price
   # end
 end
+

@@ -50,12 +50,6 @@ class Admin::DevicesController < Admin::BaseController
     redirect_back fallback_location: admin_devices_path, notice: 'Success'
   end
 
-  # def destroy
-  #   @device.destroy
-  #   redirect_to admin_device_path(@device)
-  # end
-
-
   def destroy_multiple
     Device.destroy(params[:device_ids])
     respond_to do |format|
