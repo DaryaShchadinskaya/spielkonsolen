@@ -14,7 +14,6 @@ gem 'redis', '~> 4.0'
 gem 'sassc-rails', '>= 2.1.0'
 gem 'select_all-rails'
 gem 'sprockets-rails'
-gem 'sqlite3', '~> 1.4'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'webpacker'
@@ -27,6 +26,7 @@ gem 'will_paginate-bootstrap5'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'sqlite3', '~> 1.4'
   gem 'pry'
   gem 'rspec-rails'
 end
@@ -38,6 +38,10 @@ end
 group :test do
   gem 'capybara'
   gem 'webdrivers'
+end
+
+group :production do
+  gem 'pg'
 end
 
 gem 'devise', '~> 4.8'
