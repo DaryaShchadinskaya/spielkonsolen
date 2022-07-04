@@ -1,5 +1,4 @@
 <h1 class="text-center mt-4">[Admin] Booking orders list</h1>
-
 <% if (@orders) %>
     <% if (@orders.empty?) %> 
      <h5 class="text-center">No orders found</h5>
@@ -22,7 +21,7 @@
         <% @orders.each do |order| %>
           <tr>            
               <td><%= order.id %></td>
-              <td><%= order.name %></td>
+              <td><%= order.email %></td>
               <td><%= truncate(order.description, length: 500) %></td>
               <td><%= truncate(order.equipment, length: 500)  %></td>
               <td><%= order.price %></td>

@@ -16,44 +16,38 @@ td {
 }
 </style>
 
-<h1 class="text-center mt-4">[ADMIN] Showing order № <%= @order.id %> details</h1>
+<h1 class="text-center mt-4">[ADMIN] Order details: № <%= @order.id %> </h1>
 
 <div class="container">
 <table style="width:100%">
     <tr>
         <th scope="row">Customer Email</th>
-        <td><%= @order.id %></td>
+        <td><%= @order.email %></td>
     </tr>
     <tr>
         <th scope="row">Customer Name</th>
-        <td><%= @order.id %></td>
+        <td><%= @order.full_name %></td>
     </tr>
     <tr>
         <th scope="row">Phone number</th>
-        <td><%= @order.id %></td>
+        <td><%= @order.phone_number %></td>
     </tr>
     <tr>
         <th scope="row">Device</th>
-        <td><%= @order.id %></td>
+        <td><%= @order.device %></td>
     </tr>
-        <th scope="row">Price</th>
-        <td><%= @order.id %></td>
-    </tr>
+
     <tr>
         <th scope="row">Start date of booking</th>
-        <td><%= @order.id %></td>
+        <td><%= @order.date_of_booking %></td>
     </tr>
     <tr>
         <th scope="row">Term of booking</th>
-        <td><%= @order.id %></td>
-    </tr>
-    <tr>
-        <th scope="row">Time for delivery</th>
-        <td><%= @order.id %></td>
+        <td><%= @order.quantity %></td>
     </tr>
     <tr>
         <th scope="row">Delivery method</th>
-        <td><%= @order.id %></td>
+        <td><%= @order.delivery %></td>
     </tr>
 </table>
 </div>

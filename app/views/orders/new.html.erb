@@ -2,13 +2,12 @@
 <div class="table-responsive">
 <div class="container">
  <table class="table table-hover table-striped">
-
+  <%= render 'shared/errors_order', obj: @order %>
   <thead>
   <tr>
    <th>Device name </th>  
    <th>Image</th> 
    <th>Price, $</th>
-   <th>Term of booking, days</th>
   </tr>
   </thead>
 
@@ -39,68 +38,87 @@
 </div>
 </div>
 
-
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-10">
-      <%= render 'shared/errors', obj: @order %>
-      <%= form_with(model: [@order], class: "shadow p-3 mb-3 bg-info rounded", local: true) do |f| %>
+<h3 class="text-left mt-4">Booking information</h3>
 
-        <div class="form-group mb-3">
-          <%= f.label :Term_of_booking, class: "col-2 col-form-label text-light" %>
-          <div class="col-10">
-            <%= f.text_field :quantity, required: true, class: "form-control shadow rounded", placeholder: "Term of booking, days" %>
-          </div>
-        </div>
+<div class="col-lg-3 col-md-12">
+ <div class="row orderWrapper">
+  <div class="col-lg-12 col-lg-offset-0 col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+   <form id="orderFrom" method="post" action class="form-horizontal ng-pristine ng-valid fv-form fv-form-bootstrap" novalidate="novalidate">
 
-        <div class="form-group mb-3">
-          <%= f.label :phone_number, class: "col-2 col-form-label text-light" %>
-          <div class="col-10"> 
-            <%= f.text_area :phone_number, required: true, rows: 5, class: "form-control shadow rounded", placeholder: "Enter your phone number" %>
-          </div>
-        </div>
-
-        <div class="form-group mb-3">
-          <%= f.label :date_of_booking, class: "col-2 col-form-label text-light" %>
-          <div class="col-10"> 
-            <%= f.text_area :date_of_booking, required: true, rows: 5, class: "form-control shadow rounded", placeholder: "Select start of booking" %>
-          </div>
-        </div>
-
-        <div class="form-group mb-3">
-          <%= f.label :email, class: "col-2 col-form-label text-light" %>
-          <div class="col-10"> 
-            <%= f.text_area :email, required: true, rows: 5, class: "form-control shadow rounded", placeholder: "Enter your email" %>
-          </div>
-        </div>
-
-        <div class="form-group mb-3">
-          <%= f.label :delivery, class: "col-2 col-form-label text-light" %>
-          <div class="col-10"> 
-            <%= f.text_area :delivery, required: true, rows: 5, class: "form-control shadow rounded", placeholder: "Enter delivery" %>
-          </div>
-        </div>
-
-        <div class="form-group mb-3">
-          <%= f.label :address, class: "col-2 col-form-label text-light" %>
-          <div class="col-10"> 
-            <%= f.text_area :address, required: true, rows: 5, class: "form-control shadow rounded", placeholder: "Enter the address" %>
-          </div>
-        </div>
-
-
-        <div class="form-group mb-3">
-          <%= f.label :full_name, class: "col-2 col-form-label text-light" %>
-          <div class="col-10"> 
-            <%= f.text_area :full_name, required: true, rows: 5, class: "form-control shadow rounded", placeholder: "Enter your full name" %>
-          </div>
-        </div>
-
-        <div class="form-group row justify-content-center"> 
-          <%= f.submit "Submit", :class => 'btn btn-outline-light btn-lg' %>    
-          <%= link_to "Cancel", devices_path, data: { confirm: 'Are you sure?' } %>           
-        </div>
-      <% end %>
+    <div class="form-group">
+     <div class="col-md-12">
+      <input type="text" class="form-control ng-valid ng-touched nd-dirty ng-valid-parse ng-empty" name="termOfBooking" ng-model="termOfBooking" placeholder="1" data-fv-field="termOfBooking" autocomplete="1">
+      <small class="help-block" data-fv-validator="notEmpty" data-fv-for="termOfBooking" data-fv-result="INVALID" style="display: block;">Term of booking, days<%= @order.quantity %></small>
+      <small class="help-block" data-fv-validator="regexp" data-fv-for="termOfBooking" data-fv-result="VALID" style="display: none;">Term of booking, days</small>    
+     </div>
     </div>
-  </div>
-</div>
+
+    <div class="form-group">
+     <div class="col-md-12">
+      <input type="text" class="form-control ng-valid ng-touched nd-dirty ng-valid-parse ng-empty" name="phone" ng-model="phoneTest" placeholder="+1 XXX XXX XXXX" data-fv-field="phone" autocomplete="off">
+      <small class="help-block" data-fv-validator="notEmpty" data-fv-for="phone" data-fv-result="INVALID" style="display: block;">Enter your phone number<%= @order.phone_number %></small>
+      <small class="help-block" data-fv-validator="regexp" data-fv-for="phone" data-fv-result="VALID" style="display: none;">Enter the telephone number in the format +1 XXX XXX XXXX</small>    
+     </div>
+    </div>
+    <div class="form-group">
+     <div class="col-md-12">
+      <input type="text" class="form-control ng-valid ng-touched nd-dirty ng-valid-parse ng-empty" name="email" ng-model="emailTest" placeholder="Email" data-fv-field="email" autocomplete="off">
+      <small class="help-block" data-fv-validator="notEmpty" data-fv-for="email" data-fv-result="INVALID" style="display: block;">Enter your email<%= @order.email %></small>
+      <small class="help-block" data-fv-validator="regexp" data-fv-for="email" data-fv-result="VALID" style="display: none;">[email_name]@[site].[domain]</small>    
+     </div>
+    </div>
+    <div class="form-group">
+     <div class="col-md-12">
+      <div class="input-group date" id="fromDate">
+       <input type="text" name="from" placeholder="Start date of booking" class="form-control" autocomplete="off" data-fv-field="from">
+      </div>
+      <small class="help-block" data-fv-validator="notEmpty" data-fv-for="from" data-fv-result="VALID" style="display: none;">Select start of booking<%= @order.date_of_booking %></small>
+      <small class="help-block" data-fv-validator="date" data-fv-for="from" data-fv-result="INVALID" style="display: block;">Enter the date in  DD.MM.YYYY format</small>
+     </div>
+    </div>
+<div class="form-group">
+      <div class="col-md-12">
+        <select class="form-control ng-pristine ng-untouched ng-valid ng-empty" name="delivery" ng-model="delivery" ng-change="makeDelivery(delivery)" data-fv-field="delivery">
+          <option value>Delivery method<%= @order.delivery %></option>
+            <optgroup label="Self-pickup within the Minsk">
+              <option value="minsk">Minsk, st. Niamiga 11</option>
+              <option value="minsk">Minsk, st. Nekrasove 32</option>
+            </optgroup>
+          <optgroup label="Courier delivery">
+           <option value="courier-minsk">Minsk</option>
+          </optgroup>
+        </select>
+        <small class="help-block" data-fv-validator="notEmpty" data-fv-for="delivery" data-fv-result="VALID" style="display: none;">Select a delivery method<%= @order.delivery %></small>
+      </div>
+     </div>
+
+     <div class="form-group ng-hide" ng-show="deliveryNeeded">
+      <div class="col-md-12">
+        <input type="text" class="form-control" name="address" placeholder="Address" data-fv-field="address">
+        <small class="help-block" data-fv-validator="notEmpty" data-fv-for="address" data-fv-result="NOT_VALIDATED" style="display: none;">Enter the address<%= @order.address %></small>
+      </div>
+     </div>
+
+     <div class="form-group">
+      <div class="col-md-12">
+       <input type="text" class="form-control" name="fullname" placeholder="Full name" data-fv-field="fullname">
+       <small class="help-block" data-fv-validator="notEmpty" data-fv-for="fullname" data-fv-result="NOT_VALIDATED" style="display: none;">Enter your full name<%= @order.full_name %></small>
+       <small class="help-block" data-fv-validator="regexp" data-fv-for="fullname" data-fv-result="NOT_VALIDATED" style="display: none;">Min characters: 1 and Max characters: 100</small>
+       </div>
+       </div>
+       <div class="totalText text-center">
+        <h4>Total:</h4>
+        
+        <%# <h2><%= @order.total_price %>
+        </div>
+        <div class="form-group makeOrderBtnWrap">
+         <div class="col-lg-12 col-md-6 col-sm-6 col-xs-6">
+          <%= button_to "Submit", orders_path, :method => :post %>
+          </div>
+          </div> 
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>

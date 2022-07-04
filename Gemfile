@@ -19,25 +19,20 @@ gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'webpacker'
 
-# gem "kredis"
-# gem "bcrypt", "~> 3.1.7"
-
+gem 'bootsnap', '>= 1.4.4', require: false
+gem 'image_processing', '~> 1.2'
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'will_paginate', '~> 3.3'
 gem 'will_paginate-bootstrap5'
-gem 'bootsnap', '>= 1.4.4', require: false
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'image_processing', '~> 1.2'
 
 group :development, :test do
+  gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'pry'
   gem 'rspec-rails'
-  gem 'debug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
   gem 'web-console'
-  # gem "rack-mini-profiler"
-  # gem "spring"
 end
 
 group :test do
